@@ -1,0 +1,23 @@
+#carousel {
+    background: #eee;
+    width: 100%;
+    min-height: 80px;
+    font-size: 0;
+    margin-top: 25px;
+    /* display: flex; */
+}
+
+.image {
+    width: 80px;
+    height: 80px;
+    /* background: red; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    cursor: grab;
+}
+
+.image:active {
+    cursor: grabbing;
+}

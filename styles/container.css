@@ -1,0 +1,32 @@
+#container {
+    width: 100%;
+}
+
+.row {
+    width: calc(100% - 2px);
+    height: 80px;
+    border: 1px solid black;
+    background: black;
+    font-size: 0;
+}
+
+.row > div {
+    height: 100%;
+    display: inline-block;
+}
+
+.label {
+    width: 80px;
+    background: chocolate;
+    /* border: 1px solid black; */
+}
+
+.list {
+    width: calc(100% - 160px);
+    background: #333;
+}
+
+.settings {
+    width: 80px;
+    background: black;
+}
