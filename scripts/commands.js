@@ -1,7 +1,7 @@
 document.onkeydown = (e) => {
     if (e.key == "Control") {
         document.body.setAttribute("class", "control");
-    } else if (e.key == "r") {
+    } else if (e.key == "r" && false) {
         reset = true;
         window.location.reload();
     }
@@ -24,6 +24,7 @@ document.body.ondblclick = (e) => {
 }
 
 window.onbeforeunload = () => {
+    return;
     localStorage.clear();
     if (reset) { return; }
     var i = 0;
