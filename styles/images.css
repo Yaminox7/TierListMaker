@@ -4,17 +4,23 @@
     --image-fs: 0.75rem;
 
     --carousel-bg: #eee;
+    --carousel-empty-bg: #ccc;
 }
 
 #carousel {
     background: var(--carousel-bg);
     width: 960px;
-    min-height: var(--image-height);
     margin-top: 25px;
     font-size: 0;
     padding: 5px;
     border-radius: 10px;
     border: solid;
+    transition: background 0.1s;
+}
+
+#carousel:empty {
+    height: var(--image-height);
+    background: var(--carousel-empty-bg);
 }
 
 .image {

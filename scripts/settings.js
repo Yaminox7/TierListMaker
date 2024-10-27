@@ -6,16 +6,18 @@ function setButtons(row, gear, up, down) {
 function settingButton(row) {
     var gear = row.getElementsByClassName("gear")[0];
     gear.onclick = () => {
+        var label = row.getElementsByClassName("label")[0];
+        overlay.style.display = "flex";
+        overlay.setAttribute("target", label.id.replace("l", ""));
+
         var rows = container.childElementCount;
-        var list = row.getElementsByClassName("list")[0];
+        var list = document
+          .getElementById(label.id.replace("l", "r"))
+          .getElementsByClassName("list")[0];
         deleteBtn.disabled = rows <= MIN_ROWS;
         addUpBtn.disabled = rows >= MAX_ROWS;
         addDownBtn.disabled = rows >= MAX_ROWS;
         updateRowButtons(list);
-
-        var label = row.getElementsByClassName("label")[0];
-        overlay.style.display = "flex";
-        overlay.setAttribute("target", label.id.replace("l", ""));
         
         var color = getBgColor(label);
         var index = colors.indexOf(color);
@@ -63,6 +65,7 @@ deleteBtn.onclick = () => {
     closeOverlay();
     updateButtons();
     updateStorageElems(carousel);
+    totalRows--;
 };
 
 clearBtn.onclick = () => {
@@ -99,6 +102,7 @@ moveAllBtn.onclick = () => {
     var row = document.getElementById("r"+overlay.getAttribute("target"));
     var list = row.getElementsByClassName("list")[0];
     moveChildren(carousel, list);
+    updateStorageElems(list);
     updateStorageElems(carousel);
     for (var orow of container.children) {
         if (orow.id == row.id) { continue; }
@@ -207,5 +211,7 @@ function updateRowButtons(list) {
 function resetImages() {
     for (var row of container.children) {
         moveImages(row);
+        updateStorageElems(row.getElementsByClassName("list")[0]);
     }
+    updateStorageElems(carousel);
 }

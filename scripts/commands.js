@@ -1,5 +1,22 @@
 document.onkeydown = (e) => {
-    if (e.key == "Control") {
+    if (e.ctrlKey) {
+        if (e.altKey) {
+            if (e.key == "ArrowLeft") {
+                var newpreset = parseInt(preset) - 1;
+                if (newpreset > MIN_PRESETS) {
+                    localStorage.setItem("preset", newpreset)
+                    window.location.reload();
+                }
+                return;
+            } else if (e.key == "ArrowRight") {
+                var newpreset = parseInt(preset) + 1;
+                if (newpreset <= MAX_PRESETS) {
+                    localStorage.setItem("preset", newpreset)
+                    window.location.reload();
+                }
+                return;
+            }
+        }
         document.body.setAttribute("class", "control");
     }
 };

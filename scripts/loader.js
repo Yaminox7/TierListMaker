@@ -1,15 +1,17 @@
 load(defaultTexts);
 
 function load(defaultTexts) {
+    createElement("span", "preset", "", document.body).innerText = preset;
+
     for (var image of images.children) { makeDraggable(image); }
 
-    var entries = Object.entries(localStorage);
+    var entries = getEntries();
 
-    var imgs = localStorage.getItem("carousel");
-    localStorage.clear();
-    imgs = (imgs == "" || imgs == null) ? [] : imgs.split(",");
+    var imgs = getItem("carousel");
+    clear();
+    imgs = (imgs == [] || imgs == null) ? [] : imgs;
     for (var img of imgs) { carousel.append(document.getElementById(img)); }
-    localStorage.setItem("carousel", Array.from(carousel.children).map(child => { return child.id; }));
+    setItem("carousel", Array.from(carousel.children).map(child => { return child.id; }));
 
     var rowsEntries = entries.filter(entry => { return entry[0] != "carousel"; });
     rowsEntries = rowsEntries.sort((a, b) => { return parseInt(a[0]) - parseInt(b[0]); });
@@ -17,13 +19,12 @@ function load(defaultTexts) {
         var rows = [];
         for (var i = 0; i < rowsEntries.length; i++) {
             var key = rowsEntries[i][0];
-            var item = rowsEntries[i][1];
+            var obj = rowsEntries[i][1];
 
-            var obj = unstringify(item);
             var name = obj.name;
             var color = colors[parseInt(obj.color)];
             var elems = obj.elems;
-            localStorage.setItem(key, item);
+            setItem(key, obj);
             
             var row = createRow(totalRows+1, container, color, name);
             rows.push(row);
@@ -59,8 +60,8 @@ function makeRows(texts) {
     for (var text of texts) {
         var name = text;
         var color = totalRows % colors.length;
-        var elems = [];
-        localStorage.setItem(totalRows, stringify(name, color, elems))
+        var obj = {name: name, color: color, elems: []};
+        setItem(totalRows, obj)
         var row = createRow(totalRows+1, container, colors[color], name);
         rows.push(row);
         totalRows++;

@@ -32,3 +32,13 @@ body {
 #images {
     display: none;
 }
+
+#preset {
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 32px;
+    color: transparent;
+    z-index: 5;
+    text-shadow: 0 0 6px white;
+}
